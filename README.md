@@ -7,7 +7,7 @@ use-search-query requires the next/navigation package as a peer dependency; ther
 You can contribute via [Github](https://github.com/FlyingTurkman/use-search-query)
 
 ## How to install?
-``bash
+``
 npm install use-search-query
 ``
 

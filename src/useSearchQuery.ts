@@ -5,14 +5,24 @@ import { useCallback } from 'react'
 
 
 
+export type RouteOptions = {
+    scroll?: boolean
+    reset?: boolean
+}
+
+export type SetOptions = {
+    reset?: boolean
+}
+
 
 export function useSearchQuery() {
     
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    const setSearchParams = useCallback((updates: Record<string, string | number | undefined | null>) => {
-        const params = new URLSearchParams(searchParams.toString())
+    const setSearchParams = useCallback((updates: Record<string, string | number | undefined | null>, options?: SetOptions) => {
+
+        const params = options?.reset === true ? new URLSearchParams() : new URLSearchParams(searchParams.toString())
 
         Object.entries(updates).forEach(([key, value]) => {
             if (value  === undefined || value === null || value.toString().trim() == '') {
@@ -25,13 +35,16 @@ export function useSearchQuery() {
         const queryString = params.toString()
 
         return queryString
+        
     }, [searchParams])
 
 
-    const routeToSearchParams = useCallback((pathname: string, updates: Record<string, string | number | undefined | null>, scroll?: boolean) => {
-        const queryString = setSearchParams(updates)
+    const routeToSearchParams = useCallback((pathname: string, updates: Record<string, string | number | undefined | null>, options: RouteOptions) => {
+        const queryString = setSearchParams(updates, {
+            reset: options.reset
+        })
 
-        router.replace(`${pathname}?${queryString}`, { scroll: scroll ? scroll : false})
+        router.replace(`${pathname}?${queryString}`, { scroll: options.scroll ? options.scroll : false })
     }, [router, setSearchParams])
 
     return {

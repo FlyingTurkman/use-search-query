@@ -19,7 +19,13 @@ This function is used to update search params and navigate to a page.
 |:---|:---|:---|:---|
 | pathname | string | Yes | The base path for navigation. Similar to Next.js usePathname |
 | updates | `Record<string, string \| number \| undefined \| null>` | Yes | An object containing your query updates. You can update one or multiple fields simultaneously. |
-| scroll | boolean | No | Determines if the page should scroll to the top after navigation. Passed to router.replace. |
+| options | `RouteOptions` | No | See below |
+
+`RouteOptions` parameters
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| reset | boolean | No | Default value is `false`. If `true` resets all search parameters. Removes existing search params and adds new parameters from the updates object. |
+| scroll | boolean | No | Default value is `false`. Determines if the page should scroll to the top after navigation. Passed to router.replace. |
 
 ```tsx
 
@@ -73,6 +79,14 @@ export default function Page() {
             >
                 Next Page
             </button>
+            <button
+            onClick={() => {
+                // Resets all search parameters. Removes existing search params and adding new parameters from the updates object.
+                routeToSearchParams(pathname, {}, { reset: true })
+            }}
+            >
+                Reset Filters
+            </button>
         </div>
     )
 
@@ -87,7 +101,12 @@ This function returns a new query string without triggering navigation.
 | Parameter | Type | Required | Description |
 |:--- | :--- | :--- | :--- |
 | updates | `Record<string, string \| number \| undefined \| null>` | Yes | An object containing your query updates. It generates a query string while preserving existing parameters. |
+| options | `SetOptions` | No | See below |
 
+`SetOptions` parameters
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| reset | boolean | No | Default value is `false`. If `true` resets all search parameters. Removes existing search params and adds new parameters from the updates object. |
 
 ```tsx
 
@@ -144,6 +163,15 @@ export default function Page() {
             }}
             >
                 Next Page
+            </button>
+            <button
+            onClick={() => {
+                // Resets all search parameters. Removes existing search params and adding new parameters from the updates object.
+                const newSearchQuery = setSearchParams({}, { reset: true })
+                router.replace(`${pathname}?${newSearchQuery}`)
+            }}
+            >
+                Reset Filters
             </button>
         </div>
     )

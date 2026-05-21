@@ -39,12 +39,12 @@ export function useSearchQuery() {
     }, [searchParams])
 
 
-    const routeToSearchParams = useCallback((pathname: string, updates: Record<string, string | number | undefined | null>, options: RouteOptions) => {
+    const routeToSearchParams = useCallback((pathname: string, updates: Record<string, string | number | undefined | null>, options?: RouteOptions) => {
         const queryString = setSearchParams(updates, {
-            reset: options.reset
+            reset: options?.reset ? options.reset : false
         })
 
-        router.replace(`${pathname}?${queryString}`, { scroll: options.scroll ? options.scroll : false })
+        router.replace(`${pathname}?${queryString}`, { scroll: options?.scroll ? options?.scroll : false })
     }, [router, setSearchParams])
 
     return {

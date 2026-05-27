@@ -64,7 +64,7 @@ export default function Page() {
             onClick={() => {
 
                 // Updates a single value without affecting other existing search params. Here, only the page number changes; the searchTerm remains the same.
-                routeToSearchParams(pathname, { page: page - 1 }, true)
+                routeToSearchParams(pathname, { page: page - 1 })
                 setPage((prev) => prev - 1)
             }}
             >
@@ -73,7 +73,7 @@ export default function Page() {
             <button
             onClick={() => {
                 // Updates a single value without affecting other existing search params. Here, only the page number changes; the searchTerm remains the same.
-                routeToSearchParams(pathname, { page: page + 1 }, true)
+                routeToSearchParams(pathname, { page: page + 1 })
                 setPage((prev) => prev + 1)
             }}
             >

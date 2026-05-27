@@ -3,6 +3,9 @@ It's developed for [Next.js](https://nextjs.org/) developers.
 
 use-search-query requires the next/navigation package as a peer dependency; therefore, **use-search-query only working with Next.js.**
 
+## Docs
+[Website](https://use-search-query.vercel.app/) for detailed documents.
+
 ## How to contribute? 
 You can contribute via [Github](https://github.com/FlyingTurkman/use-search-query)
 
